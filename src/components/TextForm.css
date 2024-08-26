@@ -1,0 +1,41 @@
+/* Styles for the popup container */
+.popupcontainer {
+    background-color: lightgrey;
+    color: black;
+    padding: 10px;
+    border-radius: 5px;
+    position: fixed;
+    top: 7%;
+    left: 70%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    
+    /* Animation to fade in and fade out */
+    animation: fadeInOut 2s ease-in-out;
+    opacity: 0; /* Ensure it starts invisible */
+  }
+  
+  @keyframes fadeInOut {
+    0% {
+      opacity: 0;
+      transform: translate(-50%, -60%); /* Start slightly above */
+    }
+    10% {
+      opacity: 1;
+      transform: translate(-50%, -50%); /* Move to position */
+    }
+    90% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+      transform: translate(-50%, -40%); /* Move slightly down */
+    }
+  }
+
+  .btn-custom {
+    background-color: #922db4; /* Pink color */
+    color: white; /* Text color */
+  }
+  
+  
