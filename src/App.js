@@ -14,12 +14,14 @@ function App() {
       setMode("dark");
       document.body.style.backgroundColor = "rgb(30 86 131)";
       document.body.style.color = "white";
+      document.title = "TextUtils - Dark Mode";
       showAlert("Dark mode has been enabled","success");
       
     } else {
       setMode("light");
       document.body.style.backgroundColor = "white";
       document.body.style.color = "black";
+      document.title = "TextUtils - Light Mode";
       showAlert("Light mode has been enabled","success");
     }
   }
