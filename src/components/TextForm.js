@@ -29,7 +29,6 @@ export default function TextForm(props) {
     let newText = text.toLowerCase();
     setText(newText);
     props.showAlert("Text converted to lowercase", "success");
-
   };
 
   const handleCopyClick = () => {
@@ -49,7 +48,6 @@ export default function TextForm(props) {
     let newText = text.split(/[ ]+/);
     setText(newText.join(" "));
     props.showAlert("Extra spaces removed", "success");
-
   };
 
   const handleClearClick = () => {
@@ -63,9 +61,7 @@ export default function TextForm(props) {
   return (
     <>
       <div>
-        <h1>
-          {props.heading}{" "}
-        </h1>
+        <h1>{props.heading} </h1>
         <div className="mb-3 my-4">
           <textarea
             className="form-control"
@@ -105,7 +101,7 @@ export default function TextForm(props) {
           read
         </p>
         <h2>Preview</h2>
-        <p>{text}</p>
+        <p>{text.length > 0 ? text : "Enter text in the box to preview"}</p>
       </div>
 
       {/* Popup Notification */}
