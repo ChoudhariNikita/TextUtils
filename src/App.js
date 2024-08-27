@@ -1,9 +1,7 @@
 import Navbar from "./components/Navbar"; // All imports at the top
 import TextForm from "./components/TextForm";
-import About from "./components/About";
 import Alert from "./components/Alerts";
 import React, { useState } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 let titleOfApp = "TextUtils";
 
@@ -45,24 +43,16 @@ function App() {
   };
 
   return (
-    <Router>
-    <Navbar title={titleOfApp} mode={mode} toggleMode={toggleMode} />
-    <Alert alert={alert} />
-    <div className="container my-3">
-      <Routes>
-        <Route exact
-          path="/"
-          element={
-            <TextForm
-              heading="Unleash Your Text Magic Below!"
-              showAlert={showAlert}
-            />
-          }
+    <>
+      <Navbar title={titleOfApp} mode={mode} toggleMode={toggleMode} />
+      <Alert alert={alert} />
+      <div className="container my-3">
+        <TextForm
+          heading="Unleash Your Text Magic Below!"
+          showAlert={showAlert}
         />
-        <Route exact path="/about" element={<About menuActive="active" />} />
-      </Routes>
-    </div>
-    </Router>
+      </div>
+    </>
   );
 }
 
