@@ -3,15 +3,15 @@ import "./TextForm.css";
 
 export default function TextForm(props) {
   const [text, setText] = useState("");
+  const [showPopup, setShowPopup] = useState(false); // State to control the popup visibility
+
   let myStyle = {
     backgroundColor: "#cbe9f3",
   };
 
-  const [showPopup, setShowPopup] = useState(false); // State to control the popup visibility
-
   const handleUpClick = () => {
-    if (text === null || text === undefined) {
-      console.log("Text is null or undefined, cannot convert to upper case");
+    if (text.trim() === "") {
+      props.showAlert("Please enter some text", "warning");
       return;
     }
     console.log("Set upper case button clicked");
@@ -21,8 +21,8 @@ export default function TextForm(props) {
   };
 
   const handleLowClick = () => {
-    if (text === null || text === undefined) {
-      console.log("Text is null or undefined, cannot convert to lower case");
+    if (text.trim() === "") {
+      props.showAlert("Please enter some text", "warning");
       return;
     }
     console.log("Set lower case button clicked");
@@ -32,28 +32,40 @@ export default function TextForm(props) {
   };
 
   const handleCopyClick = () => {
-    if (text && text.trim() !== "") {
-      // Check if text is not empty
-      navigator.clipboard.writeText(text);
-
-      setShowPopup(true);
-
-      setTimeout(() => {
-        setShowPopup(false);
-      }, 3000);
+    if (text.trim() === "") {
+      props.showAlert("Please enter some text to copy", "warning");
+      return;
     }
+    // Check if text is not empty
+    navigator.clipboard.writeText(text);
+    setShowPopup(true);
+
+    setTimeout(() => {
+      setShowPopup(false);
+    }, 3000);
+    props.showAlert("Text copied to clipboard", "success");
   };
 
   const handleExtraSpaces = () => {
+    if (text.trim() === "") {
+      props.showAlert("Please enter some text to remove extra spaces", "warning");
+      return;
+    }
     let newText = text.split(/[ ]+/);
-    setText(newText.join(" "));
-    props.showAlert("Extra spaces removed", "success");
+    if (newText.length > 1) {
+      setText(newText.join(" "));
+      props.showAlert("Extra spaces removed", "success");
+    }
   };
 
   const handleClearClick = () => {
+    if (text.trim() === "") {
+      props.showAlert("Nothing to clear", "warning");
+      return;
+    }
     console.log("Clear text button clicked");
-    let newText = "";
-    setText(newText);
+    setText("");
+    props.showAlert("Text cleared", "success");
   };
 
   const handleTextChange = (event) => setText(event.target.value);
@@ -73,19 +85,22 @@ export default function TextForm(props) {
             style={myStyle}
           ></textarea>
         </div>
-        <button className="btn btn-primary mx-1" onClick={handleUpClick}>
+        <button className="btn btn-primary mx-1 my-1" onClick={handleUpClick}>
           Convert to Uppercase
         </button>
-        <button className="btn btn-success mxx-1" onClick={handleLowClick}>
+        <button className="btn btn-success mx-1 my-1" onClick={handleLowClick}>
           Convert to Lowercase
         </button>
-        <button className="btn btn-dark mx-1" onClick={handleCopyClick}>
+        <button className="btn btn-dark mx-1 my-1" onClick={handleCopyClick}>
           Copy Text
         </button>
-        <button className="btn btn-custom mx-1" onClick={handleExtraSpaces}>
+        <button
+          className="btn btn-custom mx-1 my-1"
+          onClick={handleExtraSpaces}
+        >
           Remove extra spaces
         </button>
-        <button className="btn btn-danger mx-1" onClick={handleClearClick}>
+        <button className="btn btn-danger mx-1 my-1" onClick={handleClearClick}>
           Clear Text
         </button>
       </div>
